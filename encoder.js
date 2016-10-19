@@ -32,22 +32,24 @@ var shift = {
 
 
 
-//CHARLES DOWELL'S CODE NO STEAL
+//Check for true radio buttons
 $("input[type='radio']").click(function() {
   $("input:checked").prop('checked', false);
   $(this).prop('checked', true);
+});
+
+$("#inputArea").keydown(function(e) {
+  if(e.keyCode == 13) {
   if ($("input:checked").val() == "echo") {
-    $("#inputArea").keydown(function(e) {
-      if(e.keyCode == 13) {
+
         $("#textArea").append(document.getElementById('inputText').value += " ");
         document.getElementById('inputText').value = "";
+
     }
-    });
-  }
-  //CHARLES DOWELL'S CODE NO STEAL
+
+  //Splits user input, divides into a individual characters
   else if ($("input:checked").val() == "caesar") {
-    $("#inputArea").keydown(function(e) {
-      if(e.keyCode == 13) {
+
     var ex = document.getElementById('inputText').value;
 
     var y = ex.length + 1;
@@ -59,15 +61,17 @@ $("input[type='radio']").click(function() {
       var z = ex.substring(minus, x);
       console.log(z);
       $("#textArea").append(caeserConvert[z]);
+      document.getElementById('inputText').value = "";
+      //loops through conversion and outputs each character individually
 
     }
+    $("#textArea").append(" ");
     }
-    });
-  }
-  //CHARLES DOWELL'S CODE NO STEAL
+
+
+  //Loops user input through heiroglyphic converter
   else if ($("input:checked").val() == "heiro") {
-    $("#inputArea").keydown(function(e) {
-      if(e.keyCode == 13) {
+
     var ex = document.getElementById('inputText').value;
 
     var y = ex.length + 1;
@@ -79,14 +83,36 @@ $("input[type='radio']").click(function() {
       var z = ex.substring(minus, x);
       console.log(z);
       $("#textArea").append(heiroConvert[z]);
-
+document.getElementById('inputText').value = "";
     }
+    $("#textArea").append(" ");
     }
-    });
-  }
-})
+    };
+  });
 
-//CHARLES DOWELL'S CODE NO STEAL
+  $("#translationInputArea").keydown(function(e) {
+    if(e.keyCode == 13) {
+      var ex = document.getElementById('translationInputText').value;
+
+      var y = ex.length + 1;
+
+      var minus = x - 1;
+      for(var x = 0; x < y; x++) {
+        var minus = x - 1;
+        var z = ex.substring(minus, x);
+        console.log(z);
+        $("#translationArea").append(decodeConvertC[z]);
+  document.getElementById('translationInputText').value = "";
+
+
+      }
+    }
+  });
+
+
+
+
+//Converter objects used for input translation
 
 
 
@@ -117,9 +143,11 @@ var caeserConvert = {
   "w": "v",
   "x": "w",
   "y": "x",
-  "z": "a",
+  "z": "y",
   " ": " ",
 }
+
+//Because it's outputting html, this converter outputs images translating the users input
 
 var heiroConvert = {
   "a": "<img src='images/heiroglyphics/a.gif'>",
@@ -147,6 +175,36 @@ var heiroConvert = {
   "w": "<img src='images/heiroglyphics/w.gif'>",
   "x": "<img src='images/heiroglyphics/x.gif'>",
   "y": "<img src='images/heiroglyphics/y.gif'>",
+  "z": "<img src='images/heiroglyphics/z.gif'>",
+  " ": " ",
+}
+
+var decodeConvertC = {
+  "a": "b",
+  "b": "c",
+  "c": "d",
+  "d": "e",
+  "e": "f",
+  "f": "g",
+  "g": "h",
+  "h": "i",
+  "i": "j",
+  "j": "k",
+  "k": "l",
+  "l": "m",
+  "m": "n",
+  "n": "o",
+  "o": "p",
+  "p": "q",
+  "q": "r",
+  "r": "s",
+  "s": "t",
+  "t": "u",
+  "u": "v",
+  "v": "w",
+  "w": "x",
+  "x": "y",
+  "y": "z",
   "z": "a",
   " ": " ",
 }
