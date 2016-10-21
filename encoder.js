@@ -1,5 +1,3 @@
-
-
 //Check for true radio buttons
 $("input[type='radio']").click(function() {
   $("input:checked").prop('checked', false);
